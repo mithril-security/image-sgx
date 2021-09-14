@@ -1003,6 +1003,9 @@ fn read_line_u8_test() {
 /// Helper function for reading raw 3-channel f32 images
 pub fn read_raw_file<P: AsRef<Path>>(path: P) -> ::std::io::Result<Vec<Rgb<f32>>> {
     use byteorder::{LittleEndian as LE, ReadBytesExt};
+    #[cfg(target_env = "sgx")]
+    use std::untrusted::fs::File;
+    #[cfg(not(target_env = "sgx"))]
     use std::fs::File;
     use std::io::BufReader;
 

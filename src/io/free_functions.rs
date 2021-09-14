@@ -1,3 +1,6 @@
+#[cfg(target_env = "sgx")]
+use std::untrusted::fs::File;
+#[cfg(not(target_env = "sgx"))]
 use std::fs::File;
 use std::io::{BufRead, BufReader, BufWriter, Seek};
 use std::path::Path;
